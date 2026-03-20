@@ -1,0 +1,27 @@
+{{ define "main" }}
+
+{{ $list := (where .Site.Pages "Type" "post") }}
+
+<div class="archive-header">
+  <h1 class="archive-header__title">Archive</h1>
+  <p class="archive-header__count">
+    {{ len $list }} {{ if eq (len $list) 1 }}post{{ else }}posts{{ end }}
+  </p>
+</div>
+
+<ul class="archive-list">
+{{ range $list }}
+<li class="archive-item rise-in h-entry">
+  <time class="archive-item__date dt-published" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+  <div class="archive-item__title">
+    {{ if .Title }}
+    <a href="{{ .Permalink }}" class="u-url p-name">{{ .Title }}</a>
+    {{ else }}
+    <a href="{{ .Permalink }}" class="u-url">{{ .Summary | plainify | truncate 80 }}</a>
+    {{ end }}
+  </div>
+</li>
+{{ end }}
+</ul>
+
+{{ end }}
