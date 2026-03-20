@@ -13,13 +13,8 @@
 <link rel="icon" type="image/png" href="{{ "favicon.png" | relURL }}">
 <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
 
-<!-- IndieWeb / micro.blog -->
-{{ with .Site.Params.microblog_username }}<link rel="me" href="https://micro.blog/{{ . }}">{{ end }}
-<link rel="authorization_endpoint" href="https://micro.blog/indieauth/auth">
-<link rel="token_endpoint" href="https://micro.blog/indieauth/token">
-<link rel="micropub" href="https://micro.blog/micropub">
-<link rel="microsub" href="https://micro.blog/microsub">
-<link rel="webmention" href="https://micro.blog/webmention">
+<!-- micro.blog head (feeds, IndieWeb, plugins) -->
+{{ partial "microblog_head.html" . }}
 
 <link rel="stylesheet" href="{{ "assets/current.css" | relURL }}">
 

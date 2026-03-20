@@ -766,10 +766,88 @@ img {
   border-radius: 0;
 }
 
-.article__body img {
+.article__body img,
+.e-content img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: block;
   border-radius: 8px;
   margin: 2em auto;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* micro.blog post body */
+.post-body img,
+.e-content img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  margin: 2em auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* micro.blog fallback styles for when post/single.html isn't used */
+.post.h-entry {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--content-padding);
+}
+
+.post.h-entry .headline {
+  font-family: var(--font-ui);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--text-tertiary);
+  font-weight: normal;
+}
+
+.post.h-entry .headline a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+}
+
+.post.h-entry .post-body,
+.post.h-entry .e-content {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+}
+
+.post.h-entry .post-body p {
+  margin-bottom: 1.5em;
+}
+
+#post-meta {
+  max-width: var(--content-width);
+  margin: 2em auto;
+  padding: 1.5em var(--content-padding) 0;
+  border-top: 1px solid var(--border);
+}
+
+#post-meta .avatar {
+  border-radius: 22%;
+  width: 40px;
+  height: 40px;
+}
+
+#post-meta a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: var(--text-small);
+}
+
+#post-meta .dark {
+  color: var(--text);
+  font-weight: 500;
 }
 
 .article__body ul,
