@@ -26,13 +26,13 @@
     {{ with .PrevInSection }}
     <a href="{{ .Permalink }}">
       <span class="article__nav-label">&larr; Older</span>
-      {{ .Title | default "Untitled" | truncate 40 }}
+      {{ .Title | default (.Summary | plainify | truncate 40) }}
     </a>
     {{ else }}<span></span>{{ end }}
     {{ with .NextInSection }}
     <a href="{{ .Permalink }}" style="text-align:right;">
       <span class="article__nav-label">Newer &rarr;</span>
-      {{ .Title | default "Untitled" | truncate 40 }}
+      {{ .Title | default (.Summary | plainify | truncate 40) }}
     </a>
     {{ else }}<span></span>{{ end }}
   </nav>
