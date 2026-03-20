@@ -1,6 +1,7 @@
 {{ define "main" }}
 
-<article class="article{{ if eq .Params.layout "beliefs" }} beliefs{{ end }} h-entry">
+{{ $isBeliefs := or (eq .Params.layout "beliefs") (eq .Title "Beliefs") }}
+<article class="article{{ if $isBeliefs }} beliefs{{ end }} h-entry">
   <header class="article__header">
     <time class="article__date dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
     {{ with .Title }}
@@ -8,7 +9,7 @@
     {{ end }}
   </header>
 
-  <div class="article__body e-content{{ if and .Title (ne .Params.layout "beliefs") }} drop-cap{{ end }}">
+  <div class="article__body e-content{{ if and .Title (not $isBeliefs) }} drop-cap{{ end }}">
     {{ .Content }}
   </div>
 
