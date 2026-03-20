@@ -1,0 +1,39 @@
+{{ define "main" }}
+
+{{ $micro := where .Site.RegularPages "Type" "post" }}
+{{ $local := where .Site.RegularPages "Type" "posts" }}
+{{ $posts := union $micro $local }}
+
+<div class="archive-header">
+  <h1 class="archive-header__title">Archive</h1>
+  <p class="archive-header__count">
+    {{ len $posts }} {{ if eq (len $posts) 1 }}post{{ else }}posts{{ end }}
+  </p>
+</div>
+
+{{ $paginator := .Paginate $posts 20 }}
+
+<ul class="archive-list">
+{{ range $paginator.Pages }}
+<li class="archive-item rise-in">
+  <time class="archive-item__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+  <div class="archive-item__title">
+    <a href="{{ .Permalink }}">{{ .Title | default (.Date.Format "3:04 PM · Jan 2") }}</a>
+  </div>
+</li>
+{{ end }}
+</ul>
+
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination" aria-label="Pagination">
+  {{ if $paginator.HasPrev }}
+  <a href="{{ $paginator.Prev.URL }}">&larr; Newer</a>
+  {{ else }}<span class="pagination__placeholder">&larr; Newer</span>{{ end }}
+  <span class="pagination__info">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
+  {{ if $paginator.HasNext }}
+  <a href="{{ $paginator.Next.URL }}">Older &rarr;</a>
+  {{ else }}<span class="pagination__placeholder">Older &rarr;</span>{{ end }}
+</nav>
+{{ end }}
+
+{{ end }}

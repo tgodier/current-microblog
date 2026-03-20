@@ -1,0 +1,16 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    {{ with .Site.Params.footer_line }}
+    <p class="site-footer__poetic">{{ . }}</p>
+    {{ else }}
+    <p class="site-footer__poetic">Come sit by the water.</p>
+    {{ end }}
+    <p class="site-footer__meta">
+      &copy; {{ now.Year }} {{ .Site.Params.author | default .Site.Title }}
+      &middot; Powered by <a href="https://micro.blog">Micro.blog</a>
+      {{ with .OutputFormats.Get "rss" }}
+      &middot; <a href="{{ .Permalink }}">RSS</a>
+      {{ end }}
+    </p>
+  </div>
+</footer>

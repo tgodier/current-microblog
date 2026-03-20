@@ -1,0 +1,46 @@
+{{ define "main" }}
+
+{{ with .Site.Params.tagline }}
+<div class="waterline">{{ . | safeHTML }}</div>
+{{ end }}
+
+{{/* micro.blog uses Type "post" (singular), local Hugo uses "posts" (plural) */}}
+{{ $micro := where .Site.RegularPages "Type" "post" }}
+{{ $local := where .Site.RegularPages "Type" "posts" }}
+{{ $posts := union $micro $local }}
+{{ $paginator := .Paginate $posts 25 }}
+
+<div class="river h-feed">
+{{ range $i, $page := $paginator.Pages }}
+  {{ if $page.Title }}
+  {{/* ── Titled post ──────────────────────────────── */}}
+  <article class="river-item rise-in h-entry">
+    <time class="river-item__date dt-published" datetime="{{ $page.Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ $page.Date.Format "January 2, 2006" }}</time>
+    <h2 class="river-item__title p-name"><a href="{{ $page.RelPermalink }}" class="u-url">{{ $page.Title }}</a></h2>
+    <p class="river-item__excerpt p-summary">{{ $page.Summary | plainify | truncate 260 }}</p>
+    <a href="{{ $page.Permalink }}" class="river-item__more">Read more</a>
+  </article>
+  {{ else }}
+  {{/* ── Micro post (no title) ────────────────────── */}}
+  <article class="river-item river-item--micro rise-in h-entry">
+    <time class="river-item__date dt-published" datetime="{{ $page.Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ $page.Date.Format "January 2, 2006 · 3:04 PM" }}</time>
+    <div class="river-item__content e-content">{{ $page.Content }}</div>
+    <a href="{{ $page.Permalink }}" class="river-item__permalink u-url">{{ $page.Date.Format "3:04 PM" }} · permalink</a>
+  </article>
+  {{ end }}
+{{ end }}
+</div>
+
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination" aria-label="Pagination">
+  {{ if $paginator.HasPrev }}
+  <a href="{{ $paginator.Prev.URL }}">&larr; Newer</a>
+  {{ else }}<span class="pagination__placeholder">&larr; Newer</span>{{ end }}
+  <span class="pagination__info">{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
+  {{ if $paginator.HasNext }}
+  <a href="{{ $paginator.Next.URL }}">Older &rarr;</a>
+  {{ else }}<span class="pagination__placeholder">Older &rarr;</span>{{ end }}
+</nav>
+{{ end }}
+
+{{ end }}

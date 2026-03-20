@@ -1,0 +1,37 @@
+<header class="site-header">
+  <div class="site-header__inner">
+    <div>
+      <a href="{{ "/" | relURL }}" class="site-name">
+        <img src="{{ "assets/logo.png" | relURL }}" alt="" class="site-logo" width="32" height="32">
+        {{ .Site.Title }}
+      </a>
+      <p class="site-bio">I build <a href="https://www.currentreader.app">Current</a>, a calm RSS reader, and create <a href="https://www.terrygodier.com">visual essays</a> about our relationship with technology.</p>
+      <nav class="site-nav">
+        <a href="{{ "/" | relURL }}">Home</a>
+        {{ range .Site.Menus.main }}
+        <a href="{{ .URL }}">{{ .Name }}</a>
+        {{ end }}
+        <a href="{{ "/archive/" | relURL }}">Archive</a>
+      </nav>
+    </div>
+
+    <div class="theme-switcher">
+      <button class="theme-switcher__toggle" aria-label="Change theme">Aa</button>
+      <div class="theme-switcher__dropdown">
+        <div class="theme-switcher__palettes">
+          <button class="theme-switcher__dot" data-palette="paper" style="--dot-color:#B8956A" title="Paper"></button>
+          <button class="theme-switcher__dot" data-palette="bright" style="--dot-color:#007AFF" title="Bright"></button>
+          <button class="theme-switcher__dot" data-palette="ocean" style="--dot-color:#0A9A9A" title="Ocean"></button>
+          <button class="theme-switcher__dot" data-palette="dusk" style="--dot-color:#8A70C0" title="Dusk"></button>
+          <button class="theme-switcher__dot" data-palette="midnight" style="--dot-color:#555" title="Midnight"></button>
+        </div>
+        <div class="theme-switcher__size">
+          <button class="theme-switcher__size-btn" data-size="small">A</button>
+          <button class="theme-switcher__size-btn" data-size="default">A</button>
+          <button class="theme-switcher__size-btn" data-size="large">A</button>
+        </div>
+        <button class="theme-switcher__mode">&#9790; Dark</button>
+      </div>
+    </div>
+  </div>
+</header>

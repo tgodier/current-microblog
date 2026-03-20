@@ -1,0 +1,41 @@
+{{ define "main" }}
+
+<article class="article{{ if eq .Params.layout "beliefs" }} beliefs{{ end }} h-entry">
+  <header class="article__header">
+    <time class="article__date dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time>
+    {{ with .Title }}
+    <h1 class="article__title p-name">{{ . }}</h1>
+    {{ end }}
+  </header>
+
+  <div class="article__body e-content{{ if and .Title (ne .Params.layout "beliefs") }} drop-cap{{ end }}">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.tags }}
+  <div class="article__tags">
+    {{ range . }}
+    <a class="article__tag p-category" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{ if or .PrevInSection .NextInSection }}
+  <nav class="article__nav" aria-label="Post navigation">
+    {{ with .NextInSection }}
+    <a href="{{ .Permalink }}">
+      <span class="article__nav-label">&larr; Older</span>
+      {{ .Title | default "Untitled" | truncate 40 }}
+    </a>
+    {{ else }}<span></span>{{ end }}
+    {{ with .PrevInSection }}
+    <a href="{{ .Permalink }}" style="text-align:right;">
+      <span class="article__nav-label">Newer &rarr;</span>
+      {{ .Title | default "Untitled" | truncate 40 }}
+    </a>
+    {{ else }}<span></span>{{ end }}
+  </nav>
+  {{ end }}
+</article>
+
+{{ end }}
